@@ -22,7 +22,7 @@ class solution:
         self.existencia_productos_aseo = [2, 8, 34]
         self.productos_granos = ['arroz', 'Frijol blanco', 'Maiz']
         self.existencia_productos_granos = [19, 7, 15]
-        imprimirLacteos(self)
+        imprimirLacteos()
         
     def imprimirLacteos(self):
         print(self.productos_lacteos)
