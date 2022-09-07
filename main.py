@@ -11,3 +11,4 @@ from taller import solution
 inst_taller = solution()
 
 inst_taller.show_info()
+inst_taller.llenado_productos()
