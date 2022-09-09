@@ -53,7 +53,62 @@ class solution:
             self.imprimirGranos()
         elif grupo == 3:
             self.imprimirAseo()
-  
+
+    def verificarExistencia(self, nombre, grupo):
+        vector = [] 
+        vector = self.definir_vector(vector, grupo)
+        i = 0
+        existe = False
+
+        while i < int(len(vector)) and existe == False:
+            if vector[i] == nombre:
+                existe = True
+            i = i+1
+
+        return existe
+    
+    def definir_vector(self, vector, grupo):
+        if grupo == 1:
+            vector = self.productos_lacteos
+        elif grupo == 2:
+            vector = self.productos_granos
+        elif grupo == 3:
+            vector = self.productos_aseo  
+        return vector
+
+    def ingresaAGrupo(self, grupo, cantidad, nombre):
+        if self.verificarExistencia(nombre, grupo) == False:
+            if grupo == 1:
+                self.productos_lacteos.append(nombre)
+                self.existencia_productos_lacteos.append(cantidad)      
+            elif grupo == 2:
+                self.productos_granos.append(nombre)
+                self.existencia_productos_granos.append(cantidad)
+            elif grupo == 3:
+                self.productos_aseo.append(nombre)
+                self.existencia_productos_aseo.append(cantidad)
+        else: 
+            print('El producto ya existe. Se agregan los que acabas de ingresar a la cantidad en stoke')
+            self.sumarProductos(cantidad, nombre, grupo)
+
+    def sumarProductos(self, cantidad, nombre, grupo):
+        i = 0
+        if grupo == 1:
+            i = self.productos_lacteos.index(nombre)
+            cantidad1 = self.existencia_productos_lacteos[i] + cantidad 
+            self.existencia_productos_lacteos.pop(i)
+            self.existencia_productos_lacteos.insert(i, cantidad1)
+        elif grupo == 2:
+            i = self.productos_granos.index(nombre)
+            cantidad1 = self.existencia_productos_granos[i] + cantidad
+            self.existencia_productos_granos.pop(i)
+            self.existencia_productos_granos.insert(i, cantidad1)
+        elif grupo == 3:
+            i = self.productos_aseo.index(nombre)
+            cantidad1 = self.existencia_productos_aseo[i] + cantidad
+            self.existencia_productos_aseo.pop(i)
+            self.existencia_productos_aseo.insert(i, cantidad1)
+
     def Ingresa_informacion_productos(self, cantidad):
         if cantidad == 0:
             print('¿En qué grupo desea agregar el producto? \nRecuerda escribir el numero correpondiente a la opcion')
@@ -68,7 +123,8 @@ class solution:
                 nombre = input('Ingresa nombre del producto: ')
                 nuevos = input('Ingresa la cantidad de productos: ')
                 cantidad = self.verificar_numero(nuevos)
-                print('El nombre del producto es: '+nombre, ' y la cantidad a ingresar es ', cantidad)
+                self.ingresaAGrupo(grupo, cantidad, nombre)
+                self.eleccionImprimir(grupo)
             else:
                 print('Intenta de nuevo')
                 self.Ingresa_informacion_productos(1)
@@ -76,8 +132,6 @@ class solution:
             print('intenta de nuevo')
             self.Ingresa_informacion_productos(1)
 
-
-    
 
 
     
