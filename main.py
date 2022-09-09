@@ -12,3 +12,4 @@ inst_taller = solution()
 
 inst_taller.show_info()
 inst_taller.llenado_productos()
+inst_taller.Ingresa_informacion_productos(0)
